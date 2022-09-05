@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .imgcontainer{
+            position: relative;
+            width: 700px;
+            overflow: hidden;
+            height: 600px;
+        }
+        img{
+                width: 500px;
+                transition: 0.4s;
+            }
+            img:first-child:hover,img:nth-child(2):hover{
+                transform: translateX(-8px);
+            }
+        img:first-child{
+            position: absolute;
+            right: 40px;top: 30px;
+            height: 390px;
+        }
+        img:nth-child(2){
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            height: 410px;
+        }
+        img:last-child{
+            position: absolute;
+            right: 0px;
+            top: 10px;
+            height: 430px;
+        }
+        .anim1{
+            animation: anim1 0.8s ease-out 1 backwards ;
+
+        }
+       
+        @keyframes anim1 {
+            0%{
+                transform: translateX(500px);
+
+            }
+            100%{
+                transform: translateX(0px);
+            }
+            
+        }
+       
+    </style>
+</head>
+<body>
+
+
+    <div class="imgcontainer">
+
+
+    </div>
+
+
+    <script>
+        let innerContainer=``;
+        const imageContainer=document.getElementsByClassName('imgcontainer')[0];
+        let images=['https://wallpaper.dog/large/20492872.jpg',
+        'https://www.wallpaperup.com/uploads/wallpapers/2015/09/13/802057/7c7efab47754d60eb2c4a312bb65542f-700.jpg',
+        'https://images.pexels.com/photos/15239/flower-roses-red-roses-bloom.jpg?auto=compress&cs=tinysrgb&w=600'];
+        images.forEach((item)=>imageContainer.innerHTML+=`<img onclick='changeIndex.call(this)' src='${item}'/>`)
+
+        function changeIndex (){
+            let preIndex=images.indexOf(this.src);
+            let change=(preIndex==2)? false:true
+            images[preIndex]=images[2]
+            images[2]=this.src;
+            imageContainer.innerHTML='';
+            images.forEach((item)=>imageContainer.innerHTML+=`<img class='img' onclick='changeIndex.call(this)' src='${item}'/>`)
+            let imgs=document.getElementsByTagName('img');
+            if (change) {
+                imgs[2].classList.add('anim1');
+                // imgs[preIndex].classList.add('anim2');
+
+            }
+            
+            
+        }
+
+    </script>
+</body>
+</html>
